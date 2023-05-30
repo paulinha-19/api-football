@@ -34,7 +34,13 @@ const Nav = () => {
       </Typography>
       <Divider />
       {!!auth.user && (
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <List>
             {navItems.map((navItem) => (
               <ListItem key={navItem} disablePadding>
@@ -43,7 +49,7 @@ const Nav = () => {
                     to={`/${navItem}`}
                     style={{
                       textDecoration: "none",
-                      color: "#000",
+                      color: "#fff",
                       textTransform: "uppercase",
                     }}
                   >
@@ -56,7 +62,7 @@ const Nav = () => {
           <Button
             key={"logout"}
             onClick={auth.logout}
-            sx={{ display: "flex", mx: 1, color: "#000" }}
+            sx={{ display: "flex", mx: 1, color: "primary.contrastText" }}
           >
             {"logout"}
           </Button>

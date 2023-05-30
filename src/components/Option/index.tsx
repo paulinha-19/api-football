@@ -6,7 +6,7 @@ import {
   Box,
   SelectChangeEvent,
   Toolbar,
-  Alert
+  Alert,
 } from "@mui/material";
 import { useQuery } from "react-query";
 import { getCountries, getLeague, getTeams } from "../utils/utilRequests";
@@ -65,7 +65,6 @@ const Option = () => {
     const { value } = e.target;
     setSelectedCountry(value);
     setSelectedLeague("");
-    console.log("VALUE PAIS SELECIONADO", value);
   };
   const handleChangeLeague = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
@@ -74,13 +73,11 @@ const Option = () => {
     );
     setSelectedLeague(value);
     setSelectedLeagueId(nameSelectedLeague?.league.id || null);
-    console.log("VALUE LIGA", value);
   };
   const handleChangeSeason = (e: SelectChangeEvent<string>) => {
     const value = parseInt(e.target.value);
     setSelectedYearSeason(value);
     setSelectedSeason(value.toString());
-    console.log("VALUE SEASON SELECIONADA", value);
   };
   const handleChangeTeams = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
@@ -89,7 +86,6 @@ const Option = () => {
     );
     setSelectedTeam(value);
     setSelectedTeamId(nameSelectedTeam?.team.id || null);
-    console.log("ID SELECIONADo", nameSelectedTeam?.team.id || null);
   };
 
   if (isErrorCountry || isErrorLeague || isErrorTeams) {
@@ -162,7 +158,11 @@ const Option = () => {
           </Select>
         </FormControl>
         <FormControl sx={{ m: 5, minWidth: 220 }} size="small">
-          <InputLabel id="team-label">Selecione o time</InputLabel>
+          {isLoadingTeams ? (
+            <InputLabel id="label-team">Carregando os times</InputLabel>
+          ) : (
+            <InputLabel id="team-label">Selecione o time</InputLabel>
+          )}
           <Select
             labelId="team"
             id="team"

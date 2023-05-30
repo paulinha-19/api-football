@@ -3,8 +3,6 @@ import api from "../../services/api";
 export const getCountries = async () => {
   try {
     const response = await api.get("/countries");
-    console.log("RESPONSE COUNTRY", response.config.headers);
-    console.log(response.data);
     return response.data.response;
   } catch (error) {
     console.error(error);
@@ -64,7 +62,6 @@ export const getPlayers = async (
     const response = await api.get(
       `/players?league=${idLeague}&season=${season}&page=${page}`
     );
-    console.log("PLAYER RESPONSE", response.data.response);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -84,7 +81,6 @@ export const getTeamStatistics = async (
     const response = await api.get(
       `teams/statistics?season=${season}&team=${teamId}&league=${idLeague}`
     );
-    console.log("STATISTICS DATA", response.data.response);
     return response.data.response;
   } catch (error) {
     console.error(error);

@@ -49,7 +49,7 @@ const PlayerList = () => {
   const getPlayerCard = (player: IResponsePlayer) => {
     return (
       <Grid item key={player.player.id} xs={12} sm={12} md={6} lg={4} xl={4}>
-        <MotionCard whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }} >
+        <MotionCard whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
           <Card sx={{ maxWidth: 300, backgroundColor: "primary.main" }}>
             <CardMedia
               component="img"
@@ -80,6 +80,7 @@ const PlayerList = () => {
     page: number
   ) => {
     setPage(page);
+    console.log(event);
   };
 
   if (isError) {
