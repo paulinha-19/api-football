@@ -1,5 +1,16 @@
 import { IMinute } from "../../../../interfaces/responseRequests";
-import { Box, Typography, Toolbar } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Toolbar,
+  IconButton,
+  Popper,
+  PopperPlacementType,
+  Fade,
+  Paper,
+} from "@mui/material";
+import { useState, MouseEvent } from "react";
+import HelpIcon from "@mui/icons-material/Help";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -29,6 +40,7 @@ export const options = {
     title: {
       display: true,
       text: "Goals por tempo de jogo",
+      color: "#fff",
     },
   },
 };
@@ -38,6 +50,17 @@ interface GraphicProps {
 }
 
 const Graphic = ({ minutes }: GraphicProps) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [placement, setPlacement] = useState<PopperPlacementType>();
+  const [open, setOpen] = useState(false);
+  const handleClick =
+    (newPlacement: PopperPlacementType) =>
+    (event: MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+      setOpen((prev) => placement !== newPlacement || !prev);
+      setPlacement(newPlacement);
+    };
+
   const labels = [
     "0-15 minutos",
     "16-30 minutos",
@@ -52,7 +75,7 @@ const Graphic = ({ minutes }: GraphicProps) => {
     labels,
     datasets: [
       {
-        label: "Total Goals",
+        label: "Total Gols",
         data: [
           minutes["0-15"].total,
           minutes["16-30"].total,
@@ -85,7 +108,21 @@ const Graphic = ({ minutes }: GraphicProps) => {
   return (
     <Box>
       <Toolbar />
-      <Typography variant="h5">Gols marcados</Typography>
+      <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper>
+              <Typography>Clique em Total Gols ou percentage</Typography>
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
+      <Box sx={{ display: "flex" }}>
+        <Typography variant="h5">Gols marcados</Typography>
+        <IconButton aria-label="help-text" onClick={handleClick("top-start")}>
+          <HelpIcon />
+        </IconButton>
+      </Box>
       <Bar data={data} options={options} />
     </Box>
   );

@@ -18,6 +18,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { motion } from "framer-motion";
 
 const PlayerCard = styled(CardContent)({
   display: "flex",
@@ -33,6 +34,7 @@ const PlayerContent = styled(Typography)({
 });
 
 const PlayerList = () => {
+  const MotionCard = motion(Box);
   const { selectedLeagueId, selectedYearSeason } = useStates();
   const [page, setPage] = useState(1);
   const {
@@ -47,27 +49,29 @@ const PlayerList = () => {
   const getPlayerCard = (player: IResponsePlayer) => {
     return (
       <Grid item key={player.player.id} xs={12} sm={12} md={6} lg={4} xl={4}>
-        <Card sx={{ maxWidth: 300 }}>
-          <CardMedia
-            component="img"
-            height="200"
-            width="100%"
-            image={player.player.photo}
-            alt={player.player.name}
-            sx={{ objectFit: "cover" }}
-          />
-          <PlayerCard>
-            <PlayerContent variant="subtitle2">
-              Nome: {player?.player?.name}
-            </PlayerContent>
-            <PlayerContent variant="body2" color="text.secondary">
-              Idade: {player?.player?.age}
-            </PlayerContent>
-            <PlayerContent variant="body2" color="text.secondary">
-              Nacionalidade: {player?.player?.nationality}
-            </PlayerContent>
-          </PlayerCard>
-        </Card>
+        <MotionCard whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }} >
+          <Card sx={{ maxWidth: 300, backgroundColor: "primary.main" }}>
+            <CardMedia
+              component="img"
+              height="200"
+              width="100%"
+              image={player.player.photo}
+              alt={player.player.name}
+              sx={{ objectFit: "cover" }}
+            />
+            <PlayerCard>
+              <PlayerContent variant="subtitle2">
+                Nome: {player?.player?.name}
+              </PlayerContent>
+              <PlayerContent variant="body2" color="text.secondary">
+                Idade: {player?.player?.age}
+              </PlayerContent>
+              <PlayerContent variant="body2" color="text.secondary">
+                Nacionalidade: {player?.player?.nationality}
+              </PlayerContent>
+            </PlayerCard>
+          </Card>
+        </MotionCard>
       </Grid>
     );
   };

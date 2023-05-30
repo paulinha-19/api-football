@@ -36,7 +36,6 @@ export const loginRequest = async (key: string) => {
         if (results === 0 && errors) {
             alert(errors.token)
             return null;
-            throw new Error(errors.token);
         }
         return response.data;
     } catch (error) {

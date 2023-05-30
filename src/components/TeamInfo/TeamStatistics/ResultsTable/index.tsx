@@ -18,7 +18,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
   return (
     <>
       <Toolbar />
-      <Typography variant="h5" component="h5" my={5}>
+      <Typography variant="h5" component="h5">
         Resultados
       </Typography>
       <Box
@@ -31,8 +31,8 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
             style={{ width: 150, height: 150 }}
           />
         )}
-        <Table>
-          <TableHead sx={{ backgroundColor: "#ececec" }}>
+        <Table sx={{ mt: 3 }}>
+          <TableHead sx={{ backgroundColor: "primary.main" }}>
             <TableRow>
               <TableCell></TableCell>
               <TableCell>HOME</TableCell>
@@ -44,7 +44,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
             <TableRow>
               <TableCell>GAMES PLAYED</TableCell>
               <TableCell>{fixtures?.played?.home}</TableCell>
-              <TableCell sx={{ backgroundColor: "#f7efef" }}>
+              <TableCell sx={{ backgroundColor: "primary.light" }}>
                 {fixtures?.played?.away}
               </TableCell>
               <TableCell>{fixtures?.played?.total}</TableCell>
@@ -54,7 +54,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
               <TableCell sx={{ color: "#14dfe6" }}>
                 {fixtures?.wins?.home}
               </TableCell>
-              <TableCell sx={{ backgroundColor: "#f7efef" }}>
+              <TableCell sx={{ backgroundColor: "primary.light" }}>
                 {fixtures?.wins?.away}
               </TableCell>
               <TableCell sx={{ color: "#14dfe6" }}>
@@ -66,7 +66,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
               <TableCell sx={{ color: "#14dfe6" }}>
                 {fixtures?.draws?.home}
               </TableCell>
-              <TableCell sx={{ backgroundColor: "#f7efef" }}>
+              <TableCell sx={{ backgroundColor: "primary.light" }}>
                 {fixtures?.draws?.away}
               </TableCell>
               <TableCell sx={{ color: "#14dfe6" }}>
@@ -78,7 +78,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
               <TableCell sx={{ color: "#14dfe6" }}>
                 {fixtures?.loses?.home}
               </TableCell>
-              <TableCell sx={{ backgroundColor: "#f7efef" }}>
+              <TableCell sx={{ backgroundColor: "primary.light" }}>
                 {fixtures?.loses?.away}
               </TableCell>
               <TableCell sx={{ color: "#14dfe6" }}>

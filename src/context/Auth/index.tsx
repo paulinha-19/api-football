@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useMemo } from "react";
+import { createContext, useState, useEffect } from "react";
 import { IAuthProvider, IContext, IUser } from "./types";
 import { getUserLocalStorage, getKeyLocalStorage, loginRequest, setUserLocalStorage, setKeyLocalStorage } from "../../components/utils/utilAuth";
 import { useNavigate } from "react-router-dom";
