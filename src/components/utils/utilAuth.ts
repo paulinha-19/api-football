@@ -1,8 +1,8 @@
 import api from "../../services/api";
-import { IUser } from "./types";
+import { IUser } from "../../context/Auth/types";
 
 export const setUserLocalStorage = (user: IUser | null) => {
-    localStorage.setItem("u", JSON.stringify(user));
+    localStorage.setItem("u", JSON.stringify(user?.lastname));
 }
 
 export const getUserLocalStorage = () => {
@@ -14,10 +14,23 @@ export const getUserLocalStorage = () => {
     return user ?? null;
 }
 
+export const setKeyLocalStorage = (key: string | null) => {
+    localStorage.setItem("k", JSON.stringify(key));
+}
+
+export const getKeyLocalStorage = () => {
+    const json = localStorage.getItem("k");
+    if (!json) {
+        return null;
+    }
+    const key = JSON.parse(json);
+    return key ?? null;
+}
+
 export const loginRequest = async (key: string) => {
     try {
-        api.defaults.headers.common['x-rapidapi-key'] = key;
-        api.defaults.headers.common['x-rapidapi-host'] = import.meta.env.VITE_HOST
+        api.defaults.headers.get['x-rapidapi-key'] = key;
+        api.defaults.headers.get['x-rapidapi-host'] = import.meta.env.VITE_HOST
         const response = await api.get('/status');
         const { results, errors } = response.data;
         if (results === 0 && errors) {
@@ -32,5 +45,5 @@ export const loginRequest = async (key: string) => {
 }
 
 export const logout = async () => {
-    
+
 }

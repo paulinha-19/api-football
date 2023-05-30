@@ -8,6 +8,7 @@ export interface IContext {
     user: IUser | null;
     login: (key: string) => Promise<void>;
     logout: () => void;
+    key: string | null;
 }
 
 export interface IAuthProvider {
