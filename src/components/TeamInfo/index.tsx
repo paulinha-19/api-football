@@ -1,5 +1,5 @@
 import PlayerList from "./PlayerList/index";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import { useStates } from "../../context/States/useStates";
 import TeamStatistics from "./TeamStatistics";
 
@@ -14,10 +14,14 @@ const TeamInfo = () => {
   return (
     <Box>
       {isSelectionComplete ? (
-        <Box>
-          <PlayerList />
-          <TeamStatistics />
-        </Box>
+        <Grid container>
+          <Grid item xs={12} md={6}>
+            <PlayerList />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TeamStatistics />
+          </Grid>
+        </Grid>
       ) : (
         <Typography
           variant="overline"
