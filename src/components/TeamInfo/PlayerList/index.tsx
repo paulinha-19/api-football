@@ -49,7 +49,7 @@ const PlayerList = () => {
   const getPlayerCard = (player: IResponsePlayer) => {
     return (
       <Grid item key={player.player.id} xs={12} sm={12} md={6} lg={4} xl={4}>
-        <MotionCard whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
+        <MotionCard whileTap={{ scale: 0.9 }}>
           <Card sx={{ maxWidth: 300, backgroundColor: "primary.main" }}>
             <CardMedia
               component="img"
@@ -95,16 +95,19 @@ const PlayerList = () => {
   }
 
   return (
-    <Container maxWidth="md">
-      <Typography variant="h5" component="h5">
-        Jogadores
+    <Box>
+      <Container>
         <Toolbar />
-      </Typography>
-      <Grid container spacing={5}>
-        {playersData?.response?.map((player: IResponsePlayer) =>
-          getPlayerCard(player)
-        )}
-      </Grid>
+        <Typography variant="h5" component="h5">
+          Jogadores
+        </Typography>
+        <Toolbar />
+        <Grid container spacing={5}>
+          {playersData?.response?.map((player: IResponsePlayer) =>
+            getPlayerCard(player)
+          )}
+        </Grid>
+      </Container>
       <Box mt={4} sx={{ display: "flex", justifyContent: "center" }}>
         <Pagination
           count={playersData?.paging.total}
@@ -113,7 +116,7 @@ const PlayerList = () => {
           color="primary"
         />
       </Box>
-    </Container>
+    </Box>
   );
 };
 
