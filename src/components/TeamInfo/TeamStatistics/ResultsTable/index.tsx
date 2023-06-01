@@ -16,33 +16,34 @@ interface ResultsTableProps {
 }
 const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
   return (
-    <>
+    <Box sx={{ overflow: "auto" }}>
       <Toolbar />
       <Typography variant="h5" component="h5">
         Resultados
       </Typography>
-      <Box
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
+      <Toolbar />
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         {team?.logo && (
           <img
             src={team.logo}
             alt="Team Logo"
-            style={{ width: 150, height: 150 }}
+            style={{ width: 100, height: 100 }}
           />
         )}
+      </Box>
+      <Box sx={{ width: "100%", display: "table", tableLayout: "fixed" }}>
         <Table sx={{ mt: 3 }}>
           <TableHead sx={{ backgroundColor: "primary.main" }}>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell>HOME</TableCell>
-              <TableCell>AWAY</TableCell>
-              <TableCell>ALL</TableCell>
+              <TableCell>CASA</TableCell>
+              <TableCell>FORA</TableCell>
+              <TableCell>TOTAL</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>GAMES PLAYED</TableCell>
+              <TableCell>JOGOS</TableCell>
               <TableCell>{fixtures?.played?.home}</TableCell>
               <TableCell sx={{ backgroundColor: "primary.light" }}>
                 {fixtures?.played?.away}
@@ -50,7 +51,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
               <TableCell>{fixtures?.played?.total}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>WINS</TableCell>
+              <TableCell>VITÓRIAS</TableCell>
               <TableCell sx={{ color: "#14dfe6" }}>
                 {fixtures?.wins?.home}
               </TableCell>
@@ -62,7 +63,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>DRAWS</TableCell>
+              <TableCell>EMPATES</TableCell>
               <TableCell sx={{ color: "#14dfe6" }}>
                 {fixtures?.draws?.home}
               </TableCell>
@@ -74,7 +75,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>LOSS</TableCell>
+              <TableCell>DERROTAS</TableCell>
               <TableCell sx={{ color: "#14dfe6" }}>
                 {fixtures?.loses?.home}
               </TableCell>
@@ -88,7 +89,7 @@ const ResultsTable = ({ fixtures, team }: ResultsTableProps) => {
           </TableBody>
         </Table>
       </Box>
-    </>
+    </Box>
   );
 };
 

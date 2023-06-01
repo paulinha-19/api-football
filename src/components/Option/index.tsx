@@ -65,6 +65,8 @@ const Option = () => {
     const { value } = e.target;
     setSelectedCountry(value);
     setSelectedLeague("");
+    setSelectedSeason(null);
+    setSelectedTeam("");
   };
   const handleChangeLeague = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
@@ -73,11 +75,14 @@ const Option = () => {
     );
     setSelectedLeague(value);
     setSelectedLeagueId(nameSelectedLeague?.league.id || null);
+    setSelectedSeason(null);
+    setSelectedTeam("");
   };
   const handleChangeSeason = (e: SelectChangeEvent<string>) => {
     const value = parseInt(e.target.value);
     setSelectedYearSeason(value);
     setSelectedSeason(value.toString());
+    setSelectedTeam(null);
   };
   const handleChangeTeams = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
@@ -140,7 +145,7 @@ const Option = () => {
           </Select>
         </FormControl>
         <FormControl sx={{ m: 5, minWidth: 220 }} size="small">
-          <InputLabel id="season-label">Selecione a season</InputLabel>
+          <InputLabel id="season-label">Selecione a temporada</InputLabel>
           <Select
             labelId="season"
             id="season"

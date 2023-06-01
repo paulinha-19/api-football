@@ -1,5 +1,6 @@
 import { Typography, Box, Toolbar } from "@mui/material";
 import { ILineup } from "../../../../interfaces/responseRequests";
+import { useStates } from "../../../../context/States/useStates";
 
 interface FormationUsedProps {
   lineups?: ILineup[];
@@ -12,11 +13,22 @@ const FormationUsed = ({ lineups }: FormationUsedProps) => {
   const mostUsedFormation = lineups.reduce((prev: ILineup, current: ILineup) =>
     prev.played > current.played ? prev : current
   );
+  const { selectedSeason } = useStates();
   return (
     <Box>
       <Toolbar />
-      <Typography variant="h5">Formação mais utilizada</Typography>
-      <Typography>{mostUsedFormation.formation}</Typography>
+      <Typography variant="h5">
+        Formação mais utilizada em {selectedSeason}
+      </Typography>
+      <Typography
+        sx={{
+          backgroundColor: "primary.light",
+          display: "inline-block",
+          px: 1,
+        }}
+      >
+        {mostUsedFormation.formation}
+      </Typography>
       <Typography>
         Quantidade de vezes utilizada: {mostUsedFormation?.played}
       </Typography>

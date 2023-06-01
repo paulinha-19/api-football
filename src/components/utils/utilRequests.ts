@@ -53,6 +53,7 @@ export const getTeams = async (
 export const getPlayers = async (
   idLeague: number | null,
   season: number | null,
+  idTeam: number | null,
   page: number
 ) => {
   if (idLeague === null || season === null) {
@@ -60,7 +61,7 @@ export const getPlayers = async (
   }
   try {
     const response = await api.get(
-      `/players?league=${idLeague}&season=${season}&page=${page}`
+      `/players?league=${idLeague}&team=${idTeam}&season=${season}&page=${page}`
     );
     return response.data;
   } catch (error) {
