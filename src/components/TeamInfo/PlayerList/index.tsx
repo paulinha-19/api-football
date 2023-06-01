@@ -35,7 +35,7 @@ const PlayerContent = styled(Typography)({
 
 const PlayerList = () => {
   const MotionCard = motion(Box);
-  const { selectedLeagueId, selectedYearSeason } = useStates();
+  const { selectedLeagueId, selectedYearSeason, selectedTeamId } = useStates();
   const [page, setPage] = useState(1);
   const {
     isLoading,
@@ -43,8 +43,15 @@ const PlayerList = () => {
     data: playersData,
     error,
   } = useQuery<IRootPlayer>({
-    queryKey: ["players", selectedLeagueId, selectedYearSeason, page],
-    queryFn: () => getPlayers(selectedLeagueId, selectedYearSeason, page),
+    queryKey: [
+      "players",
+      selectedLeagueId,
+      selectedYearSeason,
+      selectedTeamId,
+      page,
+    ],
+    queryFn: () =>
+      getPlayers(selectedLeagueId, selectedYearSeason, selectedTeamId, page),
   });
   const getPlayerCard = (player: IResponsePlayer) => {
     return (
@@ -113,7 +120,7 @@ const PlayerList = () => {
           count={playersData?.paging.total}
           page={page}
           onChange={handlePageChange}
-          color="primary"
+          color="secondary"
         />
       </Box>
     </Box>
