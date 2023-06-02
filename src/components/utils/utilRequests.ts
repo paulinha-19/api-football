@@ -3,7 +3,7 @@ import api from "../../services/api";
 export const getCountries = async () => {
   try {
     const response = await api.get("/countries");
-    return response.data.response;
+    return response.data;
   } catch (error) {
     console.error(error);
     return error;
@@ -16,20 +16,10 @@ export const getLeague = async (country: string | null) => {
   }
   try {
     const response = await api.get(`/leagues?country=${country}`);
-    return response.data.response;
+    return response.data;
   } catch (error) {
     console.error(error);
     alert(error);
-    return error;
-  }
-};
-
-export const getSeason = async (country: string) => {
-  try {
-    const response = await api.get(`/leagues?country=${country}`);
-    return response.data.response;
-  } catch (error) {
-    console.error(error);
     return error;
   }
 };
@@ -43,7 +33,7 @@ export const getTeams = async (
   }
   try {
     const response = await api.get(`/teams?league=${league}&season=${season}`);
-    return response.data.response;
+    return response.data;
   } catch (error) {
     console.error(error);
     return error;

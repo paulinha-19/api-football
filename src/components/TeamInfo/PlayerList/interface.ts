@@ -1,13 +1,11 @@
+import { Errors, IPaging } from "../../Option/interface";
+
 export interface IRootPlayer {
-  errors: [];
+  get: string;
+  errors: Errors;
   results: number;
   paging: IPaging;
   response: IResponsePlayer[];
-}
-
-export interface IPaging {
-  current: number;
-  total: number;
 }
 
 export interface IResponsePlayer {

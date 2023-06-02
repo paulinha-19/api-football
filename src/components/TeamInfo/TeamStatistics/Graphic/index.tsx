@@ -1,4 +1,4 @@
-import { IMinute } from "../../../../interfaces/responseRequests";
+import { IMinute } from "../interface";
 import {
   Box,
   Typography,

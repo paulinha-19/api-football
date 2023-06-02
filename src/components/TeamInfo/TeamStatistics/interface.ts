@@ -1,93 +1,11 @@
-export interface Country {
-  name: string;
-  code: string;
-  flag: string;
-}
+import { Errors, IPaging } from "../../Option/interface";
 
-export interface League {
-  id: number;
-  name: string;
-  type: string;
-  logo: string;
-}
-
-export interface Season {
-  year: number;
-  start: string;
-  end: string;
-  current: boolean;
-  coverage: Coverage;
-}
-
-export interface Fixtures {
-  events: boolean;
-  lineups: boolean;
-  statistics_fixtures: boolean;
-  statistics_players: boolean;
-}
-
-export interface Coverage {
-  fixtures: Fixtures;
-  standings: boolean;
-  players: boolean;
-  top_scorers: boolean;
-  top_assists: boolean;
-  top_cards: boolean;
-  injuries: boolean;
-  predictions: boolean;
-  odds: boolean;
-}
-
-export interface LeagueData {
-  league: League;
-  country: Country;
-  seasons: Season[];
-}
-
-export interface ResponseTeam {
-  responseTeams: ResponseTeam[];
-}
-
-export interface TeamData {
-  team: Team;
-  venue: Venue;
-}
-
-export interface Team {
-  id: number;
-  name: string;
-  code: string;
-  country: string;
-  founded: number;
-  national: boolean;
-  logo: string;
-}
-
-export interface Venue {
-  id: number;
-  name: string;
-  address: string;
-  city: string;
-  capacity: number;
-  surface: string;
-  image: string;
-}
-
-//TeamStatistics
 export interface IRootTeamStatistics {
+  get: string;
   errors: Errors;
   results: number;
   paging: IPaging;
   response: IResponseTeamStatistics[];
-}
-
-interface IPaging {
-  current: number;
-  total: number;
-}
-
-interface Errors {
-  requests: string;
 }
 
 export interface IResponseTeamStatistics {

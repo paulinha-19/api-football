@@ -6,17 +6,20 @@ import {
   Box,
   SelectChangeEvent,
   Toolbar,
-  Alert,
 } from "@mui/material";
 import { useQuery } from "react-query";
 import { getCountries, getLeague, getTeams } from "../utils/utilRequests";
 import {
+  IRootCountry,
   Country,
-  LeagueData,
+  IRootLeague,
+  IResponseLeague,
   Season,
-  TeamData,
-} from "../../interfaces/responseRequests";
+  IRootTeam,
+  IResponseTeam,
+} from "./interface";
 import { useStates } from "../../context/States/useStates";
+import AlertApp from "../Alert";
 
 const Option = () => {
   const {
@@ -39,13 +42,13 @@ const Option = () => {
     isError: isErrorCountry,
     data: dataCountry,
     error: errorCountry,
-  } = useQuery("countries", getCountries);
+  } = useQuery<IRootCountry>("countries", getCountries);
   const {
     isLoading: isLoadingLeague,
     isError: isErrorLeague,
     data: dataLeague,
     error: errorLeague,
-  } = useQuery({
+  } = useQuery<IRootLeague>({
     queryKey: ["league", selectedCountry],
     queryFn: () => getLeague(selectedCountry),
     enabled: !!selectedCountry,
@@ -55,7 +58,7 @@ const Option = () => {
     isError: isErrorTeams,
     data: dataTeams,
     error: errorTeams,
-  } = useQuery({
+  } = useQuery<IRootTeam>({
     queryKey: ["teams", selectedCountry, selectedLeagueId, selectedYearSeason],
     queryFn: () => getTeams(selectedLeagueId, selectedYearSeason),
     enabled: !!selectedCountry && !!selectedLeague && !!selectedSeason,
@@ -70,8 +73,8 @@ const Option = () => {
   };
   const handleChangeLeague = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
-    const nameSelectedLeague = dataLeague?.find(
-      (item: LeagueData) => item.league.name === value
+    const nameSelectedLeague = dataLeague?.response.find(
+      (item: IResponseLeague) => item.league.name === value
     );
     setSelectedLeague(value);
     setSelectedLeagueId(nameSelectedLeague?.league.id || null);
@@ -86,17 +89,35 @@ const Option = () => {
   };
   const handleChangeTeams = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
-    const nameSelectedTeam = dataTeams?.find(
-      (item: TeamData) => item.team.name === value
+    const nameSelectedTeam = dataTeams?.response.find(
+      (item: IResponseTeam) => item.team.name === value
     );
     setSelectedTeam(value);
     setSelectedTeamId(nameSelectedTeam?.team.id || null);
   };
 
   if (isErrorCountry || isErrorLeague || isErrorTeams) {
-    return <Alert>{String(errorCountry || errorLeague || errorTeams)}</Alert>;
+    return (
+      <AlertApp severity="error" variant="filled">
+        {String(
+          (errorCountry as unknown as Error)?.message ||
+            (errorLeague as unknown as Error)?.message ||
+            (errorTeams as unknown as Error)?.message
+        )}
+      </AlertApp>
+    );
   }
-
+  if (
+    (dataCountry?.errors.errors && dataCountry?.errors?.errors?.length > 0) ||
+    (dataLeague?.errors.errors && dataLeague?.errors?.errors?.length > 0) ||
+    (dataTeams?.errors.errors && dataTeams?.errors?.errors?.length > 0)
+  ) {
+    return (
+      <AlertApp severity="error" variant="filled">
+        {String(dataCountry?.errors.errors)}
+      </AlertApp>
+    );
+  }
   return (
     <>
       <Toolbar />
@@ -115,7 +136,7 @@ const Option = () => {
             name="country"
             onChange={handleChangeCountry}
           >
-            {dataCountry?.map((item: Country, index: any) => (
+            {dataCountry?.response?.map((item: Country, index: any) => (
               <MenuItem key={index} value={item.name}>
                 {item.name}
               </MenuItem>
@@ -137,7 +158,7 @@ const Option = () => {
             onChange={handleChangeLeague}
             disabled={!selectedCountry}
           >
-            {dataLeague?.map((league: LeagueData) => (
+            {dataLeague?.response?.map((league: IResponseLeague) => (
               <MenuItem key={league.league.id} value={league.league.name}>
                 {league.league.name}
               </MenuItem>
@@ -155,11 +176,13 @@ const Option = () => {
             onChange={handleChangeSeason}
             disabled={!selectedCountry || !selectedLeague}
           >
-            {dataLeague?.[0].seasons?.map((season: Season, index: any) => (
-              <MenuItem key={index} value={season.year}>
-                {season.year}
-              </MenuItem>
-            ))}
+            {dataLeague?.response[0].seasons?.map(
+              (season: Season, index: any) => (
+                <MenuItem key={index} value={season.year}>
+                  {season.year}
+                </MenuItem>
+              )
+            )}
           </Select>
         </FormControl>
         <FormControl sx={{ m: 5, minWidth: 220 }} size="small">
@@ -177,7 +200,7 @@ const Option = () => {
             onChange={handleChangeTeams}
             disabled={!selectedCountry || !selectedLeague || !selectedSeason}
           >
-            {dataTeams?.map((team: TeamData) => (
+            {dataTeams?.response.map((team: IResponseTeam) => (
               <MenuItem key={team.team.id} value={team.team.name}>
                 {team.team.name}
               </MenuItem>

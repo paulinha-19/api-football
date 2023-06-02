@@ -1,4 +1,4 @@
-import { IFixtures, ITeam } from "../../../../interfaces/responseRequests";
+import { IFixtures, ITeam } from "../interface";
 import {
   Table,
   TableBody,

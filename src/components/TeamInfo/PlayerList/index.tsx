@@ -3,6 +3,7 @@ import { getPlayers } from "../../utils/utilRequests";
 import { useQuery } from "react-query";
 import { useStates } from "../../../context/States/useStates";
 import { IResponsePlayer, IRootPlayer } from "./interface";
+import AlertApp from "../../Alert";
 import {
   Box,
   Card,
@@ -11,8 +12,6 @@ import {
   Pagination,
   Typography,
   Container,
-  Alert,
-  AlertTitle,
   CardMedia,
   Skeleton,
   Toolbar,
@@ -92,11 +91,12 @@ const PlayerList = () => {
 
   if (isError) {
     return (
-      <Alert severity="error">
-        <AlertTitle>{String(error)}</AlertTitle>
-      </Alert>
+      <AlertApp severity="error" variant="filled">
+        {String((error as unknown as Error)?.message)}
+      </AlertApp>
     );
   }
+
   if (isLoading) {
     <Skeleton animation="wave" />;
   }

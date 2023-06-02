@@ -1,5 +1,5 @@
 import { Typography, Box, Toolbar } from "@mui/material";
-import { ILineup } from "../../../../interfaces/responseRequests";
+import { ILineup } from "../interface";
 import { useStates } from "../../../../context/States/useStates";
 
 interface FormationUsedProps {
