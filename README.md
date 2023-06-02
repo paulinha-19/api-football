@@ -22,6 +22,8 @@
 
 - Exibir um gráfico com os goals
 
+- Exibir informações do usuário na página perfil
+
 ## Execução e instalação
 
 ##### Passo 1: Clone do repositório
