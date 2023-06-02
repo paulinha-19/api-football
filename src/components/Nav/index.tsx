@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth } from "../../context/Auth/useAuth";
 
 const drawerWidth = 240;
-const navItems = ["home", "dados"];
+const navItems = ["home", "dados", "perfil"];
 
 const Nav = () => {
   const auth = useAuth();
@@ -89,19 +89,10 @@ const Nav = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link to="/" style={{ color: "#fff", textDecoration: "none" }}>
-              MEU TIME
-            </Link>
+            MEU TIME
           </Typography>
           {!!auth.user && (
             <Box className="BOX" sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button
-                key={"logout"}
-                onClick={auth.logout}
-                sx={{ my: 2, color: "white" }}
-              >
-                {"logout"}
-              </Button>
               {navItems.map((navItem) => (
                 <Button key={navItem} sx={{ color: "#fff" }}>
                   <Link
@@ -112,6 +103,13 @@ const Nav = () => {
                   </Link>
                 </Button>
               ))}
+              <Button
+                key={"logout"}
+                onClick={auth.logout}
+                sx={{ my: 2, color: "white" }}
+              >
+                {"logout"}
+              </Button>
             </Box>
           )}
         </Toolbar>
