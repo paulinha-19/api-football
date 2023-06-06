@@ -1,4 +1,4 @@
-# Api-football
+# Teste tecnico
 
 ## Funcionalidades
 
