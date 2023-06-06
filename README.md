@@ -1,4 +1,5 @@
 # Teste tecnico
+O projeto consome a API-FOOTBALL e foi um teste tecnico para uma vaga de desenvolvedor front end
 
 ## Funcionalidades
 
