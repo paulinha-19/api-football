@@ -86,6 +86,7 @@ const PlayerList = () => {
     page: number
   ) => {
     setPage(page);
+    console.log(event);
   };
 
   if (isError) {
