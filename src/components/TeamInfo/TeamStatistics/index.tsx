@@ -3,7 +3,7 @@ import ResultsTable from "./ResultsTable";
 import Graphic from "./Graphic";
 import { Box, Skeleton, Container } from "@mui/material";
 import { useQuery } from "react-query";
-import { getTeamStatistics } from "../../utils/utilRequests";
+import { getTeamStatistics } from "../../../utils/utilRequests";
 import { useStates } from "../../../context/States/useStates";
 import { IResponseTeamStatistics } from "./interface";
 import AlertApp from "../../Alert";
@@ -45,7 +45,7 @@ const TeamStatistics = () => {
             fixtures={dataStatistics?.fixtures}
             team={dataStatistics.team}
           />
-          <Graphic minutes={dataStatistics.goals.for.minute} />
+          <Graphic minutes={dataStatistics?.goals?.for?.minute} />
         </Container>
       )}
     </Box>

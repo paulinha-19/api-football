@@ -1,4 +1,5 @@
-import api from "../../services/api";
+import api from "../services/api";
+import { handleError } from "./errorHandling";
 
 export const getCountries = async () => {
   try {
@@ -6,7 +7,7 @@ export const getCountries = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    return handleError(error);
   }
 };
 
@@ -19,8 +20,7 @@ export const getLeague = async (country: string | null) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    alert(error);
-    return error;
+    return handleError(error);
   }
 };
 
@@ -33,10 +33,11 @@ export const getTeams = async (
   }
   try {
     const response = await api.get(`/teams?league=${league}&season=${season}`);
+    console.log("RESPONSE TEAM", response);
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    return handleError(error);
   }
 };
 
@@ -53,10 +54,11 @@ export const getPlayers = async (
     const response = await api.get(
       `/players?league=${idLeague}&team=${idTeam}&season=${season}&page=${page}`
     );
+    console.log("PLAYERS", response.data);
     return response.data;
   } catch (error) {
     console.error(error);
-    return error;
+    return handleError(error);
   }
 };
 
@@ -75,6 +77,6 @@ export const getTeamStatistics = async (
     return response.data.response;
   } catch (error) {
     console.error(error);
-    return error;
+    return handleError(error);
   }
 };

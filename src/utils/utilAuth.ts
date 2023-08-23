@@ -1,5 +1,5 @@
-import api from "../../services/api";
-import { IUser, ISubscription } from "../../context/Auth/types";
+import api from "../services/api";
+import { IUser, ISubscription } from "../context/Auth/types";
 
 export const setUserLocalStorage = (user: IUser | null) => {
   localStorage.setItem("u", JSON.stringify(user?.firstname));
@@ -45,14 +45,19 @@ export const loginRequest = async (key: string) => {
     api.defaults.headers.get["x-rapidapi-key"] = key;
     api.defaults.headers.get["x-rapidapi-host"] = import.meta.env.VITE_HOST;
     const response = await api.get("/status");
-    const { results, errors } = response.data;
-    if (results === 0 && errors) {
-      alert(errors.token);
+    console.log("loginRequest response.data", response);
+    const { errors } = response.data;
+    if (Object.keys(errors).length > 0) {
+      for (const errorKey in errors) {
+        const errorMessage = errors[errorKey];
+        alert(`${errorMessage}`);
+      }
       return null;
     }
     return response.data;
   } catch (error) {
-    return null;
+    console.log("ERROR", error);
+    throw error;
   }
 };
 

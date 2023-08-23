@@ -14,7 +14,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import imgLogin from "../../assets/img/login1.png";
 import { useAuth } from "../../context/Auth/useAuth";
 import { useNavigate } from "react-router-dom";
-import { getUserLocalStorage } from "../../components/utils/utilAuth";
+import { getUserLocalStorage } from "../../utils/utilAuth";
+import AlertApp from "../../components/Alert";
 
 function Copyright(props: any) {
   return (
@@ -78,6 +79,11 @@ const Login = () => {
       />
       <Grid item xs={12} sm={12} md={4}>
         <Toolbar />
+        <Toolbar />
+        <AlertApp severity="info" reOpenButton="Info">
+          Se você não tem uma Key da api-football.com para inserir abaixo pode
+          usar a key de teste: 9d9d0f29039d2f857ac61de0bdc4ab3e ou 80fb935b70ddfd34d42efe7d7e248593
+        </AlertApp>
         <Box
           sx={{
             mx: 4,
@@ -106,9 +112,7 @@ const Login = () => {
               value={key}
               onChange={handleKeyInput}
               error={errorMessage}
-              helperText={
-                errorMessage ? "Verifique se a chave está correta" : ""
-              }
+              helperText={""}
             />
             <Button
               fullWidth

@@ -8,7 +8,7 @@ import {
   setUserLocalStorage,
   setKeyLocalStorage,
   setSubscriptionLocalStorage,
-} from "../../components/utils/utilAuth";
+} from "../../utils/utilAuth";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext<IContext>({} as IContext);
@@ -35,6 +35,7 @@ const AuthProvider = ({ children }: IAuthProvider) => {
 
   const login = async (key: string) => {
     const response = await loginRequest(key);
+    console.log("response LOGIN PAGE", response);
     const { account, subscription } = response.response;
     setUser(account);
     setKey(key);

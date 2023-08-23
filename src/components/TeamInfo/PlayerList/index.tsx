@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getPlayers } from "../../utils/utilRequests";
+import { getPlayers } from "../../../utils/utilRequests";
 import { useQuery } from "react-query";
 import { useStates } from "../../../context/States/useStates";
 import { IResponsePlayer, IRootPlayer } from "./interface";
@@ -86,7 +86,6 @@ const PlayerList = () => {
     page: number
   ) => {
     setPage(page);
-    console.log(event);
   };
 
   if (isError) {
@@ -103,26 +102,29 @@ const PlayerList = () => {
 
   return (
     <Box>
-      <Container>
-        <Toolbar />
-        <Typography variant="h5" component="h5">
-          Jogadores
-        </Typography>
-        <Toolbar />
-        <Grid container spacing={5}>
-          {playersData?.response?.map((player: IResponsePlayer) =>
-            getPlayerCard(player)
-          )}
-        </Grid>
-      </Container>
-      <Box mt={4} sx={{ display: "flex", justifyContent: "center" }}>
-        <Pagination
-          count={playersData?.paging.total}
-          page={page}
-          onChange={handlePageChange}
-          color="secondary"
-        />
-      </Box>
+      {playersData?.response && playersData.response.length > 0 && (
+        <Container>
+          {" "}
+          <Toolbar />
+          <Typography variant="h5" component="h5">
+            Jogadores
+          </Typography>
+          <Toolbar />
+          <Grid container spacing={5}>
+            {playersData?.response?.map((player: IResponsePlayer) =>
+              getPlayerCard(player)
+            )}
+          </Grid>
+          <Box mt={4} sx={{ display: "flex", justifyContent: "center" }}>
+            <Pagination
+              count={playersData?.paging?.total}
+              page={page}
+              onChange={handlePageChange}
+              color="secondary"
+            />
+          </Box>
+        </Container>
+      )}
     </Box>
   );
 };

@@ -2,7 +2,7 @@ import { Box, Typography, Toolbar, Avatar } from "@mui/material";
 import {
   getUserLocalStorage,
   getSubscriptionLocalStorage,
-} from "../../components/utils/utilAuth";
+} from "../../utils/utilAuth";
 
 const Perfil = () => {
   const user = getUserLocalStorage();

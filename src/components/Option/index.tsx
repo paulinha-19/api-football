@@ -8,7 +8,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import { useQuery } from "react-query";
-import { getCountries, getLeague, getTeams } from "../utils/utilRequests";
+import { getCountries, getLeague, getTeams } from "../../utils/utilRequests";
 import {
   IRootCountry,
   Country,
@@ -89,7 +89,7 @@ const Option = () => {
   };
   const handleChangeTeams = (e: SelectChangeEvent<string>) => {
     const { value } = e.target;
-    const nameSelectedTeam = dataTeams?.response.find(
+    const nameSelectedTeam = dataTeams?.response?.find(
       (item: IResponseTeam) => item.team.name === value
     );
     setSelectedTeam(value);
@@ -200,7 +200,7 @@ const Option = () => {
             onChange={handleChangeTeams}
             disabled={!selectedCountry || !selectedLeague || !selectedSeason}
           >
-            {dataTeams?.response.map((team: IResponseTeam) => (
+            {dataTeams?.response?.map((team: IResponseTeam) => (
               <MenuItem key={team.team.id} value={team.team.name}>
                 {team.team.name}
               </MenuItem>

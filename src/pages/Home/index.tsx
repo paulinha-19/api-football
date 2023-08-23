@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Box, Typography, Button, Toolbar } from "@mui/material";
-import { getUserLocalStorage } from "../../components/utils/utilAuth";
+import { getUserLocalStorage } from "../../utils/utilAuth";
 import { Link } from "react-router-dom";
 
 const Home = () => {

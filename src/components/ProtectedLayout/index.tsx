@@ -3,7 +3,7 @@ import {
   getUserLocalStorage,
   getKeyLocalStorage,
   getSubscriptionLocalStorage,
-} from "../utils/utilAuth";
+} from "../../utils/utilAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
